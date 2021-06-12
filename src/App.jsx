@@ -1,21 +1,59 @@
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Header from './components/Header';
+
+import Main from './components/Main';
+import Menu from './components/Menu';
+import Home from './components/Home';
+import Error404 from './components/Error404';
+import About from './components/About';
+import Contact from './components/Contact';
+import Team from './components/Team';
+import Credits from './components/Credits';
+
 export default function App() {
-  console.log('Teste no console do navegador');
+  const homePage = <Home></Home>;
+  const aboutPage = <About></About>;
+  const contactPage = <Contact></Contact>;
+  const teamPage = <Team></Team>;
+
+  const menuLinks = [
+    { name: 'Home', linkTo: '/home' },
+    { name: 'Equipe', linkTo: '/equipe' },
+    { name: 'Sobre', linkTo: '/Sobre' },
+    { name: 'Contato', linkTo: '/contato' },
+  ];
+  const routes = [
+    { name: 'Home', path: ['/', '/home'], component: homePage, exact: true },
+    { name: 'Sobre', path: '/sobre', component: aboutPage },
+    { name: 'Contato', path: '/contato', component: contactPage },
+    { name: 'Equipe', path: '/equipe', component: teamPage },
+    {
+      name: 'Error 404',
+      path: '*',
+      component: Error404,
+    },
+  ];
 
   return (
-    <div>
-      <header>
-        <div className="bg-gray-100 mx-auto p-4">
-          <h1 className="text-center font-semibold text-xl">
-            Projeto base para o site da Clinica Médica Senna Joy
-          </h1>
-        </div>
-      </header>
-
-      <main>
-        <div className="container mx-auto p-4">
-          <h2>O conteúdo fica aqui.</h2>
-        </div>
-      </main>
-    </div>
+    <Router>
+      <Header></Header>
+      <Menu
+        StablishmentName={'Clínica Médica Senna Joy'}
+        Links={menuLinks}
+      ></Menu>
+      <Main>
+        <Switch>
+          {routes.map((route, i) => {
+            return (
+              <Route key={i} path={route.path} exact={route.exact}>
+                {route.component}
+              </Route>
+            );
+          })}
+        </Switch>
+      </Main>
+      <Credits></Credits>
+    </Router>
   );
 }
