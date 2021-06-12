@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+
 import { getNewId } from '../services/idService';
+import MenuItem from './MenuItem';
 
 export default function Menu({
   StablishmentName = 'Nome do estabelecimento',
@@ -43,13 +44,7 @@ export default function Menu({
                     console.log(link);
                     return (
                       <li className="nav-item" key={getNewId()}>
-                        <NavLink
-                          className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                          activeClassName="text-yellow-300"
-                          to={link.linkTo}
-                        >
-                          {link.name}
-                        </NavLink>
+                        <MenuItem link={link}></MenuItem>
                       </li>
                     );
                   })}
