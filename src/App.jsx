@@ -4,12 +4,13 @@ import Header from './components/Header';
 
 import Main from './components/Main';
 import Menu from './components/Menu';
-import Home from './components/Home';
-import Error404 from './components/Error404';
-import About from './components/About';
-import Contact from './components/Contact';
-import Team from './components/Team';
 import Credits from './components/Credits';
+
+import Home from './pages/Home';
+import About from './pages/About';
+import Team from './pages/Team';
+import Contact from './pages/Contact';
+import Error404 from './pages/Error404';
 
 export default function App() {
   const homePage = <Home></Home>;
